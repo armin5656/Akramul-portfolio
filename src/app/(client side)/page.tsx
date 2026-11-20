@@ -1,5 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+import heroPortrait from "../../../public/hero-portrait.webp";
+import ecCouncilCredential from "../../../public/ec-council-credential.webp";
+import alisonCredential from "../../../public/alison-credential.webp";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -101,10 +103,10 @@ export default function HomePage() {
 
       <header className="absolute inset-x-0 top-0 z-20">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6 lg:px-8" aria-label="Main navigation">
-          <Link href="#top" className="group inline-flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-white">
+          <a href="#top" className="group inline-flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-white">
             <span className="grid size-9 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-400/10 font-mono text-cyan-200 transition group-hover:border-cyan-200/70">AI</span>
             <span>AKRAMUL<span className="text-cyan-300">.SECURITY</span></span>
-          </Link>
+          </a>
           <div className="hidden items-center gap-6 text-sm text-slate-300 lg:flex">
             {navLinks.map(([label, href]) => <a key={href} className="transition hover:text-cyan-200" href={href}>{label}</a>)}
           </div>
@@ -114,12 +116,12 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section id="top" className="relative isolate min-h-[780px] border-b border-white/10">
+      <section id="top" className="relative isolate border-b border-white/10 md:min-h-[780px]">
         <div className="grid-lines absolute inset-0 -z-20 opacity-70" />
         <div className="absolute -left-24 top-12 -z-10 size-[34rem] rounded-full bg-blue-600/20 blur-[140px]" />
         <div className="absolute right-0 top-1/3 -z-10 size-[28rem] rounded-full bg-cyan-400/10 blur-[125px]" />
-        <div className="mx-auto grid min-h-[780px] max-w-7xl items-end gap-8 px-5 pt-32 md:grid-cols-[1.1fr_.9fr] lg:px-8">
-          <div className="pb-20 pt-16 md:pb-28">
+        <div className="mx-auto grid max-w-7xl items-end gap-8 px-5 pt-24 md:min-h-[780px] md:grid-cols-[1.1fr_.9fr] md:pt-32 lg:px-8">
+          <div className="pb-4 pt-12 md:pb-28 md:pt-16">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/5 px-3 py-1.5 text-xs font-medium tracking-wider text-cyan-100">
               <span className="size-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_3px_rgba(103,232,249,.7)]" /> Dhaka, Bangladesh
             </div>
@@ -137,10 +139,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative min-h-[480px] self-end md:min-h-[620px]">
+          <div className="relative h-[clamp(20rem,115vw,30rem)] self-end md:h-[620px]">
             <div className="absolute inset-x-[12%] bottom-10 top-12 rounded-[2.25rem] border border-cyan-300/15 bg-gradient-to-b from-blue-500/15 to-transparent" />
             <div className="absolute inset-x-[4%] bottom-0 h-[80%] rounded-t-[12rem] border-x border-t border-white/10 bg-gradient-to-t from-[#071a37] via-[#061a36]/50 to-transparent" />
-            <Image className="absolute bottom-0 left-1/2 z-10 h-[92%] w-auto max-w-[112%] -translate-x-1/2 object-contain object-bottom" src="/Hero.png" width={1355} height={1858} priority sizes="(max-width: 768px) 90vw, 44vw" alt="Akramul Islam" />
+            <Image className="absolute bottom-0 left-1/2 z-10 h-[92%] w-auto max-w-[112%] -translate-x-1/2 object-contain object-bottom" src={heroPortrait} preload sizes="(max-width: 479px) 77vw, (max-width: 767px) 322px, (max-width: 960px) 46vw, 416px" alt="Akramul Islam" />
             <div className="absolute bottom-8 left-0 z-10 rounded-2xl border border-white/10 bg-[#07152d]/85 px-4 py-3 shadow-2xl backdrop-blur sm:left-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-cyan-300">Security focus</p>
               <p className="mt-1 text-sm font-medium text-white">Resilience, response &amp; protection</p>
@@ -213,8 +215,8 @@ export default function HomePage() {
             {certifications.map((certificate, index) => <div key={certificate} className="flex gap-5 border-b border-white/10 p-5 last:border-0 sm:p-6"><span className="mt-0.5 font-mono text-xs text-cyan-300">0{index + 1}</span><p className="text-sm leading-6 text-slate-200 sm:text-base">{certificate}</p><BadgeCheck className="ml-auto mt-0.5 size-5 shrink-0 text-blue-300" /></div>)}
           </div>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
-            <div className="relative min-h-40 overflow-hidden rounded-3xl border border-white/10 bg-[#07152d]"><Image src="/EC-Council.jpeg" fill sizes="(max-width: 1024px) 45vw, 25vw" className="object-cover opacity-80" alt="EC-Council credential" /></div>
-            <div className="relative min-h-40 overflow-hidden rounded-3xl border border-white/10 bg-[#07152d]"><Image src="/alisonCeriti.png" fill sizes="(max-width: 1024px) 45vw, 25vw" className="object-cover opacity-80" alt="Alison credential" /></div>
+            <div className="relative min-h-40 overflow-hidden rounded-3xl border border-white/10 bg-[#07152d]"><Image src={ecCouncilCredential} fill sizes="(max-width: 1023px) calc(50vw - 28px), (max-width: 1280px) 32vw, 410px" className="object-cover opacity-80" alt="EC-Council credential" /></div>
+            <div className="relative min-h-40 overflow-hidden rounded-3xl border border-white/10 bg-[#07152d]"><Image src={alisonCredential} fill sizes="(max-width: 1023px) calc(50vw - 28px), (max-width: 1280px) 32vw, 410px" className="object-cover opacity-80" alt="Alison credential" /></div>
           </div>
         </div>
       </section>
@@ -231,7 +233,7 @@ export default function HomePage() {
 
       <section id="contact" className="section-shell py-24 lg:py-32"><div className="contact-panel"><div><p className="eyebrow">10 / Contact</p><h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Let&apos;s make your digital presence more resilient.</h2><p className="mt-6 max-w-xl leading-7 text-slate-300">For cybersecurity, social media security, or digital protection enquiries, get in touch directly.</p></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1"><a className="contact-link" href="mailto:digitx.comilla@gmail.com"><Mail className="size-5 text-cyan-300" /><span><small>Email</small>digitx.comilla@gmail.com</span><ExternalLink className="ml-auto size-4 text-slate-500" /></a><a className="contact-link" href="https://wa.me/8801690203446" target="_blank" rel="noreferrer"><MessageCircle className="size-5 text-cyan-300" /><span><small>WhatsApp</small>+880 1690 203446</span><ExternalLink className="ml-auto size-4 text-slate-500" /></a><div className="contact-link"><MapPin className="size-5 text-cyan-300" /><span><small>Based in</small>Dhaka, Bangladesh</span></div></div></div></section>
 
-      <footer className="border-t border-white/10"><div className="section-shell flex flex-col gap-4 py-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Akramul Islam. All rights reserved.</p><div className="flex gap-5">{navLinks.slice(1).map(([label, href]) => <a className="transition hover:text-cyan-200" key={href} href={href}>{label}</a>)}</div></div></footer>
+      <footer className="border-t border-white/10"><div className="section-shell flex flex-col gap-4 py-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Akramul Islam. All rights reserved.</p><div className="flex flex-wrap gap-x-5 gap-y-3">{navLinks.slice(1).map(([label, href]) => <a className="transition hover:text-cyan-200" key={href} href={href}>{label}</a>)}</div></div></footer>
     </main>
   );
 }
