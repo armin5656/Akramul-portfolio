@@ -110,8 +110,9 @@ export default function HomePage() {
           <div className="hidden items-center gap-6 text-sm text-slate-300 lg:flex">
             {navLinks.map(([label, href]) => <a key={href} className="transition hover:text-cyan-200" href={href}>{label}</a>)}
           </div>
-          <a className="button-ghost hidden sm:inline-flex" href="/cv.pdf" download>
-            Download CV <ArrowDownRight className="size-4" />
+          <a className="button-ghost shrink-0" href="/cv.pdf" download>
+            <span className="sr-only sm:not-sr-only">Download CV</span>
+            <ArrowDownRight className="size-4" aria-hidden="true" />
           </a>
         </nav>
       </header>
