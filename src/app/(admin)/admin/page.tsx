@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import BlurText from "../../../components/ui/BlurText/BlurText";
 import axiosInstance from "@/lib/axios";
@@ -18,28 +19,25 @@ const AdminPage = () => {
     setError("");
 
     try {
-      await axiosInstance.post("/auth/login", { email, password });
+      await axiosInstance.post("/auth/login", { email, password }, { timeout: 20000 });
       router.push("/admin/YzIxNGRmN2U5MzY=");
       router.refresh();
     } catch (error: unknown) {
-      const status =
-        typeof error === "object" &&
-        error !== null &&
-        "response" in error &&
-        typeof error.response === "object" &&
-        error.response !== null &&
-        "status" in error.response &&
-        typeof error.response.status === "number"
-          ? error.response.status
-          : undefined;
-
-      setError(
-        status === 429
-          ? "Too many sign-in attempts. Please try again later."
-          : status === 503
-            ? "Sign-in is temporarily unavailable. Please try again later."
-            : "Invalid email address or password."
-      );
+      const requestError = isAxiosError(error) ? error : undefined;
+      const status = requestError?.response?.status;
+      if (status === 401) {
+        setError("Invalid email address or password.");
+      } else if (status === 429) {
+        setError("Too many sign-in attempts. Please try again later.");
+      } else if (status === 400) {
+        setError("Check your email address and password, then try again.");
+      } else if (status === 403) {
+        setError("The sign-in request was blocked. Reload this page and try again.");
+      } else if (requestError?.code === "ECONNABORTED" || requestError?.code === "ETIMEDOUT") {
+        setError("The sign-in request timed out. Please try again.");
+      } else {
+        setError("Sign-in is temporarily unavailable. Please try again later.");
+      }
       setIsLoading(false);
     }
   };
